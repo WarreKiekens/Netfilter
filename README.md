@@ -38,7 +38,7 @@ Remark: In a few cases there is a drop all statement at the end, ALL packets get
 sudo iptables -A INPUT -p icmp -j DROP --icmp-type echo-request
 sudo iptables -A OUTPUT -p icmp -j DROP --icmp-type echo-reply
 ```
-OR
+Or
 ```bash
 sudo iptables -A INPUT -j DROP
 ```
