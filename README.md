@@ -25,7 +25,7 @@ Install the following required packages for this challenge.
   ```
 
 ## Disable Zone Transfers
-Edit the primary configuration file for bind9, located in ```/etc/bind/named.conf```.
+Edit the primary configuration file for bind9, located in [```/etc/bind/named.conf.options```](/etc/bin/named.conf.options).
 Append ```allow-transfer {"none"; };``` to disable all zone transfers.
 Next, restart the service using the following command, ```service bind9 restart```.
 
