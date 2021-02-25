@@ -47,15 +47,10 @@ Remark: In a few cases there is a drop all statement at the end, ALL packets get
   iptables -A INPUT -p ICMP -m limit --limit 4/minute --limit-burst 8 -j ACCEPT
   iptables -A INPUT -j DROP
   ```
-## Disable outgoing connection, except for security updates
-
 ## Make services available (http, ftp & dns)
 At the start we installed a few services, which are now blocked by the iptables due to the ```bash iptables -A INPUT -j DROP``` entry.
 We need to define a new set of rules, which are added before the drop statement.
-- Allow incoming connections, which are already open.
-  ```bash
-  iptables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
-  ```
+
 - Allow http traffic (apache):
   ```bash
   iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
@@ -71,6 +66,17 @@ We need to define a new set of rules, which are added before the drop statement.
   iptables -A INPUT -p udp --dport 53 -j ACCEPT
   iptables -A OUTPUT -p udp --dport 53 -j ACCEPT
   ```
-## Result
-We now end up with the following configuration files:
+## Disable outgoing connection, except for security updates
+Since we only need to allow apt-get to make updates, we need to allow those services thru the firewall.
+- Allow incoming connections, which are already open:
+  ```bash
+  iptables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+  ```
+- Drop outgoing connections:
+  ```bash
+  iptables -A OUTPUT -j DROP
+  ```
+## Result iptables
+We now end up with the following configuration file, if the commands were executed in the right order.
+
 
