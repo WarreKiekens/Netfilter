@@ -32,7 +32,7 @@ Next, restart the service using the following command, ```service bind9 restart`
 
 ## Protection against ping flooding
 You have 2 options to defend against ping flooding:  
-Remark: In a few cases there is a drop all statement at the end, ALL packets get denied by default if we haven't allowed them yet.
+Remark: In a few cases there is a drop all statement at the end, **ALL** packets get denied by default if we haven't allowed them yet.
 - Disable ping-packets:
   ```bash
   iptables -A INPUT -p icmp -j DROP --icmp-type echo-request
