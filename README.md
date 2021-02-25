@@ -38,7 +38,7 @@ Remark: In a few cases there is a drop all statement at the end, ALL packets get
   iptables -A INPUT -p icmp -j DROP --icmp-type echo-request
   iptables -A OUTPUT -p icmp -j DROP --icmp-type echo-reply
   ```
-Or
+  Or
   ```bash
   iptables -A INPUT -j DROP
   ```
