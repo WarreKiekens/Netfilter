@@ -36,6 +36,7 @@ Remark: In a few cases there is a drop all statement at the end, ALL packets get
 - Disable ping-packets:
 ```bash
 sudo iptables -A INPUT -p icmp -j DROP --icmp-type echo-request
+sudo iptables -A OUTPUT -p icmp -j DROP --icmp-type echo-reply
 ```
 Or
 ```bash
