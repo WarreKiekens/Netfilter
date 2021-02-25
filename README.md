@@ -78,9 +78,5 @@ Since we only need to allow apt-get to make updates, we need to allow those serv
   ```
 ## Result iptables
 We now end up with the following configuration file, if the commands were executed in the right order.
-<img
-src=“image.png”
-raw=true
-alt=“Result iptables”
-/>
+![Result Iptables](/image.png)
 
