@@ -47,6 +47,4 @@ sudo iptables -A INPUT -j DROP
 sudo iptables -A INPUT -p ICMP -m limit --limit 4/minute --limit-burst 8 -j ACCEPT
 sudo iptables -A INPUT -j DROP
 ```
-## Disable outgoing connection
-
-## Allow installation of (outgoing/incoming) security updates
+## Disable outgoing connection, except for security updates
