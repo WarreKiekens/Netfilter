@@ -68,7 +68,7 @@ We need to define a new set of rules, which are added before the drop statement.
   ```
 ## Disable outgoing connection, except for security updates
 Since we only need to allow apt-get to make updates, we need to allow those services thru the firewall.
-- Allow incoming connections, which are already open:
+- Allow incoming connections, which were already open:
   ```bash
   iptables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
   ```
@@ -80,4 +80,24 @@ Since we only need to allow apt-get to make updates, we need to allow those serv
 We now end up with the following configuration file, if the commands were executed in the right order.
 
 ![Result Iptables](/image.png)
+
+All commands in order:
+```bash
+iptables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+
+iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+iptables -A OUTPUT -p tcp -m tcp --dport 80 -j ACCEPT
+
+iptables -A INPUT -p tcp -m tcp --dport 21 -j ACCEPT
+iptables -A OUTPUT -p tcp -m tcp --dport 21 -j ACCEPT
+
+iptables -A INPUT -p udp --dport 53 -j ACCEPT
+iptables -A OUTPUT -p udp --dport 53 -j ACCEPT
+
+iptables -A INPUT -p ICMP -m limit --limit 4/minute --limit-burst 8 -j ACCEPT
+iptables -A OUTPUT -p ICMP -m limit --limit 4/minute --limit-burst 8 -j ACCEPT
+
+iptables -A INPUT -j DROP
+iptables -A OUTPUT -j DROP
+```
 
