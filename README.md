@@ -1,6 +1,6 @@
 # Netfilter
 
-1. Disable Zone Transfers
+#1. Disable Zone Transfers
 
 2. Protection against ping flooding
 
