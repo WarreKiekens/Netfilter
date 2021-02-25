@@ -31,7 +31,14 @@ Next, restart the service using the following command, ```service bind9 restart`
 
 
 ## Protection against ping flooding
+You hav 2 options to defend against ping flooding:
+- Disable ping-packets
 
+- Limit ping-packets
+```bash
+sudo iptables -A INPUT -p ICMP -m limit --limit 5/minute --limit-burst 5 -j ACCEPT
+sudo iptables -A INPUT -j DROP
+```
 ## Disable outgoing connection
 
 ## Allow installation of (outgoing/incoming) security updates
