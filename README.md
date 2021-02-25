@@ -5,6 +5,11 @@ The server is provided with the following services: Apache, ProFTPd and bind9. P
 Present your result through a git commit on Gitlab or Github.
 
 ## Installation
+Ubuntu VM Details:
+- ubuntu-20.04.2.0
+- desktop
+- amd64
+
 Install the following required packages for this challenge.
 - [Apache](https://www.apache.org/): Is an opensource web server.
   ```bash
