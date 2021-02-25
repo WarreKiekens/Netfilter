@@ -68,6 +68,7 @@ We need to define a new set of rules, which are added before the drop statement.
   ```
 ## Disable outgoing connection, except for security updates
 Since we only need to allow apt-get to make updates, we need to allow those services thru the firewall.
+Most of these services are already allowed (http, ftp & dns), from the previous step.
 - Allow incoming connections, which were already open:
   ```bash
   iptables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
