@@ -48,7 +48,7 @@ Remark: In a few cases there is a drop all statement at the end, ALL packets get
   iptables -A INPUT -j DROP
   ```
 ## Make services available (http, ftp & dns)
-At the start we installed a few services, which are now blocked by the iptables due to the ```bash iptables -A INPUT -j DROP``` entry.
+At the start we installed a few services, which are now blocked by the iptables due to the ```iptables -A INPUT -j DROP``` entry.
 We need to define a new set of rules, which are added before the drop statement.
 
 - Allow http traffic (apache):
