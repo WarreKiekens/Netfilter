@@ -1,5 +1,5 @@
 # Netfilter
-Challenge:
+Challenge:  
 As a system engineer your expertise is asked to create a firewall ruleset for a hosting server.
 The server is provided with the following services: Apache, ProFTPd and bind9. Please, do not allow zonetransfers (think twice). Also protect the server against ping flooding. The server is not allowed to make outgoing connections, except for the installation of security updates.
 Present your result through a git commit on Gitlab or Github.
@@ -25,13 +25,13 @@ Install the following required packages for this challenge.
   ```
 
 ## Disable Zone Transfers
-Edit the primary configuration file for bind9, located in [```/etc/bind/named.conf.options```](/etc/bin/named.conf.options).
-Append ```allow-transfer {"none"; };``` to disable all zone transfers.
+Edit the primary configuration file for bind9, located in [```/etc/bind/named.conf.options```](/etc/bin/named.conf.options).  
+Append ```allow-transfer {"none"; };``` to disable all zone transfers.  
 Next, restart the service using the following command, ```service bind9 restart```.
 
 
 ## Protection against ping flooding
-You have 2 options to defend against ping flooding:
+You have 2 options to defend against ping flooding:  
 Remark: In a few cases there is a drop all statement at the end, ALL packets get denied by default if we haven't allowed them yet.
 - Disable ping-packets:
   ```bash
@@ -48,7 +48,7 @@ Remark: In a few cases there is a drop all statement at the end, ALL packets get
   iptables -A INPUT -j DROP
   ```
 ## Make services available (http, ftp & dns)
-At the start we installed a few services, which are now blocked by the iptables due to the ```iptables -A INPUT -j DROP``` entry.
+At the start we installed a few services, which are now blocked by the iptables due to the ```iptables -A INPUT -j DROP``` entry.  
 We need to define a new set of rules, which are added before the drop statement.
 
 - Allow http traffic (apache):
@@ -67,7 +67,7 @@ We need to define a new set of rules, which are added before the drop statement.
   iptables -A OUTPUT -p udp --dport 53 -j ACCEPT
   ```
 ## Disable outgoing connection, except for security updates
-Since we only need to allow apt-get to make updates, we need to allow those services thru the firewall.
+Since we only need to allow apt-get to make updates, we need to allow those services thru the firewall.  
 Most of these services are already allowed (http, ftp & dns), from the previous step.
 - Allow incoming connections, which were already open:
   ```bash
