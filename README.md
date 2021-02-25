@@ -52,6 +52,10 @@ Remark: In a few cases there is a drop all statement at the end, ALL packets get
 ## Make services available (http, ftp & dns)
 At the start we installed a few services, which are now blocked by the iptables due to the ```bash iptables -A INPUT -j DROP``` entry.
 We need to define a new set of rules, which are added before the drop statement.
+- Allow incoming connections, which are already open.
+  ```bash
+  iptables -A OUTPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+  ```
 - Allow http traffic (apache):
   ```bash
   iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
