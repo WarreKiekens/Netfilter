@@ -34,19 +34,39 @@ Next, restart the service using the following command, ```service bind9 restart`
 You hav 2 options to defend against ping flooding:
 Remark: In a few cases there is a drop all statement at the end, ALL packets get denied by default if we haven't allowed them yet.
 - Disable ping-packets:
-```bash
-sudo iptables -A INPUT -p icmp -j DROP --icmp-type echo-request
-sudo iptables -A OUTPUT -p icmp -j DROP --icmp-type echo-reply
-```
+  ```bash
+  iptables -A INPUT -p icmp -j DROP --icmp-type echo-request
+  iptables -A OUTPUT -p icmp -j DROP --icmp-type echo-reply
+  ```
 Or
-```bash
-sudo iptables -A INPUT -j DROP
-```
+  ```bash
+  iptables -A INPUT -j DROP
+  ```
 - Limit ping-packets (4 pings/min):
-```bash
-sudo iptables -A INPUT -p ICMP -m limit --limit 4/minute --limit-burst 8 -j ACCEPT
-sudo iptables -A INPUT -j DROP
-```
+  ```bash
+  iptables -A INPUT -p ICMP -m limit --limit 4/minute --limit-burst 8 -j ACCEPT
+  iptables -A INPUT -j DROP
+  ```
 ## Disable outgoing connection, except for security updates
 
 ## Make services available (http, ftp & dns)
+At the start we installed a few services, which are now blocked by the iptables due to the ```bash iptables -A INPUT -j DROP``` entry.
+We need to define a new set of rules, which are added before the drop statement.
+- Allow http traffic (apache):
+  ```bash
+  iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT
+  iptables -A OUTPUT -p tcp -m tcp --dport 80 -j ACCEPT
+  ```
+- Allow ftp traffic (ProFTPd):
+  ```bash
+  iptables -A INPUT -p tcp -m tcp --dport 21 -j ACCEPT
+  iptables -A OUTPUT -p tcp -m tcp --dport 21 -j ACCEPT
+  ```
+- Allow dns traffic (Bind9):
+  ```bash
+  iptables -A INPUT -p udp --dport 53 -j ACCEPT
+  iptables -A OUTPUT -p udp --dport 53 -j ACCEPT
+  ```
+## Result
+We now end up with the following configuration files:
+
