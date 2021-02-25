@@ -47,3 +47,5 @@ sudo iptables -A INPUT -p ICMP -m limit --limit 4/minute --limit-burst 8 -j ACCE
 sudo iptables -A INPUT -j DROP
 ```
 ## Disable outgoing connection, except for security updates
+
+## Make services available (http, ftp & dns)
