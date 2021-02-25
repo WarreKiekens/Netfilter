@@ -22,5 +22,5 @@ options {
 
 	listen-on-v6 { any; };
 
-  allow-transfer {"none"; };
+        allow-transfer {"none"; };
 };
