@@ -79,7 +79,7 @@ Most of these services are already allowed (http, ftp & dns), from the previous 
   iptables -A OUTPUT -j DROP
   ```
 ## Result iptables
-We now end up with the following configuration file, if the commands were executed in the right order.
+We now end up with the following configuration, if the commands were executed in the right order.
 
 ![Result Iptables](/image.png)
 
